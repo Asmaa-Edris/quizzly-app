@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+<link rel="icon" type="image/svg+xml" href="https://api.dicebear.com/7.x/icons/svg?seed=Quizzly&icon=mortarboard&backgroundColor=6366f1" />    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --primary: #6366f1;
+        --bg: #0f172a; 
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        overflow: hidden; 
+      }
+
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .loader-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .q-box {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--primary), #a855f7);
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 32px;
+        font-weight: 800;
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+        animation: rotateAndPulse 2s infinite ease-in-out;
+      }
+
+      .loading-bar {
+        width: 120px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .loading-bar-inner {
+        width: 40%;
+        height: 100%;
+        background: var(--primary);
+        border-radius: 10px;
+        animation: loadingSlide 1.5s infinite ease-in-out;
+      }
+
+      @keyframes rotateAndPulse {
+        0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+      }
+
+      @keyframes loadingSlide {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(250%); }
+      }
+
+      .loader-hidden {
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="initial-loader">
+      <div class="loader-content">
+        <div class="q-box">Q</div>
+        <div class="loading-bar">
+          <div class="loading-bar-inner"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      window.addEventListener('load', () => {
+        const loader = document.getElementById('initial-loader');
+        setTimeout(() => {
+          loader.classList.add('loader-hidden');
+          document.body.style.overflow = 'auto';
+        }, 800);
+      });
+    </script>
+  </body>
+</html>
